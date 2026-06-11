@@ -1,69 +1,85 @@
-# AquaGlow / Dorron Pro Front-End Application
+# AquaGlow Enterprises — Dorron Cleaning Solutions
 
-## Architecture Overview
+Corporate marketing site for **AquaGlow Enterprises** and its flagship brand **Dorron**.
+Built with React 19, Vite, Tailwind CSS v4, and Framer Motion.
 
-This project is a modern Single Page Application (SPA) built using React 19 and Vite. The application provides a sleek, high-performing corporate and e-commerce-style marketing site for an industrial B2B cleaning products company. 
+## Quick Start
 
-The architecture strictly adheres to a component-driven pattern, utilizing client-side routing to create a seamless, app-like experience.
+```bash
+npm install        # Install dependencies
+npm run dev        # Vite dev server (port 3000) + Express API (port 3001)
+npm run build      # Production build → dist/
+npm run server     # Standalone Express email API
+npm run lint       # tsc --noEmit (typecheck only)
+```
 
-## Core Technologies
+## Email Contact Forms
 
-- **Frontend Framework:** React 19 (Functional components, Hooks).
-- **Build Tool:** Vite for instantaneous Hot Module Replacement (HMR) and optimized, minified production builds.
-- **Styling:** Tailwind CSS v4, providing a utility-first methodology to structure complex responsive designs without leaving the TSX files.
-- **Client-Side Routing:** React Router DOM (v7) for mapping URLs to specific dashboard views without triggering full page reloads.
-- **Animations:** Framer Motion (`motion`) handles declarative physics-based animations, scroll-triggered reveals, and micro-interactions.
-- **Iconography:** Lucide React for consistent, scalable SVG icons that blend cleanly into the text color scope.
+Two lead capture forms (product inquiries and B2B quotes) POST to `/api/contact`
+and send email via **BREVO SMTP**. Set these in `.env` or in your deployment's env vars:
+
+```env
+BREVO_SMTP_USER="your-brevo-login-email"
+BREVO_SMTP_KEY="your-brevo-smtp-key"
+BREVO_FROM_EMAIL="noreply@aquaglow.co.in"
+```
+
+- **Local dev:** Vite proxies `/api/*` to Express on port 3001.
+- **Production (Vercel):** `api/contact.ts` runs as a serverless function — no Express needed.
+
+## Tech Stack
+
+| Layer | Choice |
+|-------|--------|
+| UI | React 19, Tailwind CSS v4 |
+| Routing | React Router DOM v7 |
+| Animations | Framer Motion (`motion/react`) |
+| Icons | Lucide React |
+| Email | BREVO SMTP via nodemailer |
+| Build | Vite 6 |
+| Server | Express (dev) / Vercel Functions (prod) |
+
+## Routes
+
+| Path | Page |
+|------|------|
+| `/` | Home — Hero, Product Grid, B2B Portal |
+| `/solutions` | Solutions — Industry verticals, Bio-Crest, Sustainability |
+| `/distributors` | Distributors — Partner program, Expansion map |
+| `/product/:id` | Product detail — Sizes, benefits, contact for pricing |
+| `/academy` | Academy — Courses, certifications |
+| `*` | 404 Page |
 
 ## Project Structure
 
-```text
-/
-├── public/                 # Static assets that bypass the bundler
-├── src/                    # Primary application source
-│   ├── components/         # Reusable structural and UI components
-│   │   ├── B2BPortal.tsx
-│   │   ├── Footer.tsx
-│   │   ├── Hero.tsx
-│   │   ├── Navbar.tsx
-│   │   ├── ProductGrid.tsx
-│   │   ├── *Page.tsx       # Route-level components (HomePage, AcademyPage, etc.)
-│   ├── lib/                # Shared utilities and helper functions
-│   ├── App.tsx             # Root React component managing routes & theme logic
-│   ├── constants.ts        # Hardcoded data/content arrays ensuring clean TSX
-│   ├── index.css           # Global stylesheet containing core Tailwind directives and custom CSS variables
-│   ├── main.tsx            # DOM initialization and strict-mode wrapper
-│   └── types.ts            # TypeScript definitions/interfaces ensuring type safety
-├── package.json            # Node.js dependencies and script registry
-├── tsconfig.json           # TypeScript compiler configuration
-└── vite.config.ts          # Vite bundler and plugin configuration
+```
+.
+├── api/contact.ts          # Vercel serverless email function
+├── public/images/          # Product photos and payment SVGs
+├── server/index.ts         # Express email API (local dev)
+├── src/
+│   ├── components/         # All React components
+│   ├── App.tsx             # Root component + routes
+│   ├── constants.ts        # Product data (8 SKUs)
+│   ├── types.ts            # TypeScript types
+│   └── index.css           # Tailwind v4 + custom theme
+├── AGENTS.md               # OpenCode session guidance
+└── opencode.json           # OpenCode project config
 ```
 
-## Styling & Design Principles
+## Design
 
-- **Semantic Variables:** Core styling is standardized through custom CSS variables exposed via Tailwind extensions (`bg-primary`, `text-primary`, `border-primary`, `brand-aqua`, `brand-pink`). This ensures an adaptable, tokenized styling strategy capable of theme toggling and rapid brand iterations.
-- **Transitions over Instant changes:** Smooth user experiences are guaranteed by extensive use of the `transition-colors`, `transition-all`, and `duration-500` tailwind classes.
-- **Glassmorphism:** The overarching UI aesthetic relies heavily on "Glass" panels. We leverage `backdrop-blur-*`, combined with fractional opacity backgrounds (e.g., `bg-text-primary/5`) and semi-transparent borders to convey a pristine, clean, and futuristic brand feeling.
-- **Responsive Fluid Layouts:** We employ a mobile-first philosophy, progressively layering on screen-space with `md:` and `lg:` prefixed layout breakpoints. Maximum widths (`max-w-7xl`) prevent unnatural text stretching on ultra-wide viewing windows.
+- **Dark-first** theme with `.light-mode` class toggle
+- **Glassmorphism** via `.glass-panel`, `.glass-card` utilities
+- **CSS variables** for theming: `--bg-primary`, `--text-primary`, `--border-primary`
+- **Brand colors:** `brand-aqua` (#006994), `brand-pink` (#FFC0CB), `brand-coral` (#FF7E67)
+- **Fonts:** Inter (sans), Playfair Display (serif), Space Grotesk (display)
 
-## Data Flow & State Management
+## Deployment
 
-- **Local State Handling:** Contextual data points (e.g., active dropdown menus, product details tabs, theme toggles) are kept close to their usage using React's `useState` to prevent layout re-renders where they aren't necessary.
-- **Derivation & Hooks:** Complex behavior derives directly from independent hooks. For instance, Framer Motion's `useScroll` is continually paired with `useTransform` to bind DOM translations with the user's viewport without demanding heavy state orchestration across components.
-- **Routing:** Deep-linking state relies on React Router's parameter capabilities allowing users to bookmark specific areas naturally (e.g., `/product/:id`).
+Deploy on **Vercel** (free tier):
 
-## Getting Started
-
-1. Ensure you have Node.js installed.
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Boot the local development server on Port 3000:
-   ```bash
-   npm run dev
-   ```
-4. Build for production context:
-   ```bash
-   npm run build
-   ```
+1. Push to GitHub
+2. Import repo at vercel.com
+3. Add `BREVO_SMTP_*` env vars in project settings
+4. Deploy — Vite builds the SPA, `api/contact.ts` becomes a serverless function

@@ -31,13 +31,13 @@ export default function SolutionsPage() {
         
         <div className="absolute inset-0 flex items-center justify-center text-center px-6">
            <div className="max-w-4xl">
-              <motion.h2 
+               <motion.span 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-5xl md:text-7xl font-serif font-bold text-text-primary mb-6"
+                className="block text-5xl md:text-7xl font-serif font-bold text-text-primary mb-6"
               >
                 The Science of <span className="text-brand-aqua italic">Lustrous</span> Surfaces
-              </motion.h2>
+              </motion.span>
            </div>
         </div>
       </div>
