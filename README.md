@@ -77,9 +77,26 @@ BREVO_FROM_EMAIL="noreply@aquaglow.co.in"
 
 ## Deployment
 
-Deploy on **Vercel** (free tier):
+**Recommended: Netlify** (free tier, supports serverless functions).
 
-1. Push to GitHub
-2. Import repo at vercel.com
-3. Add `BREVO_SMTP_*` env vars in project settings
-4. Deploy — Vite builds the SPA, `api/contact.ts` becomes a serverless function
+### Option A — Git-based (simplest)
+1. Push this repo to GitHub/GitLab
+2. Import at [netlify.com](https://netlify.com)
+3. Add `BREVO_SMTP_*` env vars in **Site settings → Environment variables**
+4. Deploy — Netlify runs `npm run build`, serves `dist/`, and runs `netlify/functions/contact` as a serverless function
+
+### Option B — Manual CLI deploy
+```bash
+npm install
+npm run build
+npx netlify deploy --prod --dir=dist --functions=netlify/functions
+```
+
+### Required env vars
+| Variable | Description |
+|----------|-------------|
+| `BREVO_SMTP_HOST` | `smtp-relay.brevo.com` |
+| `BREVO_SMTP_PORT` | `587` |
+| `BREVO_SMTP_USER` | Your BREVO login email |
+| `BREVO_SMTP_KEY` | Your BREVO SMTP key |
+| `BREVO_FROM_EMAIL` | `noreply@aquaglow.co.in` |
