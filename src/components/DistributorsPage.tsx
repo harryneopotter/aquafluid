@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Building2, PackageCheck, Truck, Users, ArrowRight, BarChart3, Globe2, FileText } from 'lucide-react';
 import B2BPortal from './B2BPortal';
 
 export default function DistributorsPage() {
+  useEffect(() => { document.title = 'Partner with Us — AquaGlow Distributors'; }, []);
   return (
     <div className="min-h-screen pt-32 pb-20 bg-bg-primary transition-colors duration-500">
       {/* Hero Section with Image */}
@@ -32,7 +33,7 @@ export default function DistributorsPage() {
           className="relative aspect-square lg:h-[600px] rounded-[3rem] overflow-hidden"
         >
           <img 
-            src="https://aqua.bluepanda.cloud/images/dooron_floor_industrial.png" 
+src="/images/dorron_floor_photoshoot-2.png" 
             alt="Industrial Excellence" 
             className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
           />
@@ -75,10 +76,43 @@ export default function DistributorsPage() {
         <B2BPortal />
       </div>
 
+      {/* Geographic Expansion */}
+      <section className="py-24 px-6 max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <span className="text-xs uppercase tracking-[0.4em] text-brand-pink font-bold block mb-6">Growth Map</span>
+          <h2 className="text-4xl md:text-6xl font-serif font-bold text-text-primary mb-6">Expanding Across <span className="text-brand-aqua italic">India</span></h2>
+          <p className="text-text-secondary text-lg max-w-2xl mx-auto">
+            From our base in North & West India, we're building a pan-India distribution network — with sights set on global markets.
+          </p>
+        </div>
+        <div className="grid md:grid-cols-4 gap-6">
+          <div className="glass-card text-center">
+            <div className="text-2xl font-display font-bold text-brand-aqua mb-1">2026</div>
+            <p className="text-[10px] uppercase tracking-widest text-text-secondary/60 mb-3">PHASE 1</p>
+            <p className="text-text-secondary text-sm">Consolidate and deepen distribution in North & West India</p>
+          </div>
+          <div className="glass-card text-center">
+            <div className="text-2xl font-display font-bold text-brand-pink mb-1">2027</div>
+            <p className="text-[10px] uppercase tracking-widest text-text-secondary/60 mb-3">PHASE 2</p>
+            <p className="text-text-secondary text-sm">Expand to Punjab, Haryana, UP, Bihar, West Bengal, Odisha</p>
+          </div>
+          <div className="glass-card text-center">
+            <div className="text-2xl font-display font-bold text-brand-coral mb-1">2028</div>
+            <p className="text-[10px] uppercase tracking-widest text-text-secondary/60 mb-3">PHASE 3</p>
+            <p className="text-text-secondary text-sm">Enter South & Central India: Maharashtra, MP, Telangana, Karnataka</p>
+          </div>
+          <div className="glass-card text-center">
+            <div className="text-2xl font-display font-bold text-text-primary mb-1">2030</div>
+            <p className="text-[10px] uppercase tracking-widest text-text-secondary/60 mb-3">PHASE 4</p>
+            <p className="text-text-secondary text-sm">Pan-India presence — 200+ distributor network across all 28 states</p>
+          </div>
+        </div>
+      </section>
+
       <section className="py-24 px-6 md:px-12 max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-20 items-center">
            <div className="relative aspect-video rounded-[3rem] overflow-hidden">
-              <img src="https://aqua.bluepanda.cloud/images/dooron_floor_industrial.png" alt="Industrial Facility" className="w-full h-full object-cover" />
+              <img src="/images/dorron_floor_photoshoot-2.png" alt="Industrial Facility" loading="lazy" className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-brand-aqua/20 mix-blend-multiply" />
            </div>
            <div>

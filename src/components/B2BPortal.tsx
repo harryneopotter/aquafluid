@@ -1,8 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { Building2, PackageCheck, Truck, Users, ArrowRight } from 'lucide-react';
+import { Building2, PackageCheck, Truck, Users, ArrowRight, Send } from 'lucide-react';
 
 export default function B2BPortal() {
+  const [company, setCompany] = useState('');
+  const [businessType, setBusinessType] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [volume, setVolume] = useState('');
+  const [message, setMessage] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!company || !email || !phone) return;
+    setSending(true);
+    setError('');
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          product: `B2B Quote — ${businessType || 'General'}`,
+          name: company,
+          email,
+          phone,
+          quantity: volume || 'Not specified',
+          message: `Business Type: ${businessType}\n${message}`,
+        }),
+      });
+      if (!res.ok) throw new Error('Failed to send');
+      setSubmitted(true);
+    } catch {
+      setError('Something went wrong. Please try again.');
+    } finally {
+      setSending(false);
+    }
+  };
   return (
     <section className="py-24 relative overflow-hidden">
       {/* Background patterns */}
@@ -77,39 +113,70 @@ export default function B2BPortal() {
            viewport={{ once: true }}
            className="glass-card p-10 border-border-primary"
         >
-          <h3 className="text-2xl font-bold text-text-primary mb-8">Quick Quote Request</h3>
-          <form className="space-y-6">
+           <h3 className="text-2xl font-bold text-text-primary mb-8">Quick Quote Request</h3>
+          {submitted ? (
+            <div className="text-center py-12">
+              <div className="w-16 h-16 rounded-full bg-brand-aqua/20 flex items-center justify-center mx-auto mb-6">
+                <Send className="w-8 h-8 text-brand-aqua" />
+              </div>
+              <h4 className="text-xl font-serif font-bold text-text-primary mb-3">Thank You!</h4>
+              <p className="text-text-secondary">
+                We'll review your request and get back to you within 24 hours.
+              </p>
+              <button
+                onClick={() => { setSubmitted(false); setCompany(''); setEmail(''); setPhone(''); setMessage(''); }}
+                className="btn-primary mt-8"
+              >
+                Submit Another
+              </button>
+            </div>
+          ) : (
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-2 gap-6">
               <div className="flex flex-col gap-2">
-                <label className="text-[10px] uppercase tracking-widest text-text-secondary/40">Company Name</label>
-                <input type="text" className="bg-text-primary/5 border border-border-primary rounded-xl px-4 py-3 outline-none focus:border-brand-aqua transition-colors text-text-primary" placeholder="Enterprise Ltd." />
+                <label className="text-[10px] uppercase tracking-widest text-text-secondary/40 font-bold">Company Name</label>
+                <input type="text" required value={company} onChange={(e) => setCompany(e.target.value)} className="bg-text-primary/5 border border-border-primary rounded-xl px-4 py-3 outline-none focus:border-brand-aqua transition-colors text-text-primary" placeholder="Enterprise Ltd." />
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-[10px] uppercase tracking-widest text-text-secondary/40">Business Type</label>
-                <select className="bg-text-primary/5 border border-border-primary rounded-xl px-4 py-3 outline-none focus:border-brand-aqua transition-colors appearance-none text-text-primary">
-                  <option className="bg-bg-primary">Retailer</option>
-                  <option className="bg-bg-primary">Hospitality</option>
-                  <option className="bg-bg-primary">Healthcare</option>
-                  <option className="bg-bg-primary">Industrial</option>
+                <label className="text-[10px] uppercase tracking-widest text-text-secondary/40 font-bold">Business Type</label>
+                <select value={businessType} onChange={(e) => setBusinessType(e.target.value)} className="bg-text-primary/5 border border-border-primary rounded-xl px-4 py-3 outline-none focus:border-brand-aqua transition-colors appearance-none text-text-primary">
+                  <option value="" className="bg-bg-primary">Select...</option>
+                  <option value="Retailer" className="bg-bg-primary">Retailer</option>
+                  <option value="Hospitality" className="bg-bg-primary">Hospitality</option>
+                  <option value="Healthcare" className="bg-bg-primary">Healthcare</option>
+                  <option value="Industrial" className="bg-bg-primary">Industrial</option>
                 </select>
               </div>
             </div>
+            <div className="grid grid-cols-2 gap-6">
+              <div className="flex flex-col gap-2">
+                <label className="text-[10px] uppercase tracking-widest text-text-secondary/40 font-bold">Email</label>
+                <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} className="bg-text-primary/5 border border-border-primary rounded-xl px-4 py-3 outline-none focus:border-brand-aqua transition-colors text-text-primary" placeholder="you@company.com" />
+              </div>
+              <div className="flex flex-col gap-2">
+                <label className="text-[10px] uppercase tracking-widest text-text-secondary/40 font-bold">Phone</label>
+                <input type="tel" required value={phone} onChange={(e) => setPhone(e.target.value)} className="bg-text-primary/5 border border-border-primary rounded-xl px-4 py-3 outline-none focus:border-brand-aqua transition-colors text-text-primary" placeholder="+91-XXXXXXXXXX" />
+              </div>
+            </div>
             <div className="flex flex-col gap-2">
-              <label className="text-[10px] uppercase tracking-widest text-text-secondary/40">Expected Monthly Volume</label>
-              <select className="bg-text-primary/5 border border-border-primary rounded-xl px-4 py-3 outline-none focus:border-brand-aqua transition-colors appearance-none text-text-primary">
-                <option className="bg-bg-primary">100 - 500 Liters</option>
-                <option className="bg-bg-primary">500 - 2k Liters</option>
-                <option className="bg-bg-primary">2k+ Liters (Regional Distribution)</option>
+              <label className="text-[10px] uppercase tracking-widest text-text-secondary/40 font-bold">Expected Monthly Volume</label>
+              <select value={volume} onChange={(e) => setVolume(e.target.value)} className="bg-text-primary/5 border border-border-primary rounded-xl px-4 py-3 outline-none focus:border-brand-aqua transition-colors appearance-none text-text-primary">
+                <option value="" className="bg-bg-primary">Select...</option>
+                <option value="100 - 500 Liters" className="bg-bg-primary">100 - 500 Liters</option>
+                <option value="500 - 2k Liters" className="bg-bg-primary">500 - 2k Liters</option>
+                <option value="2k+ Liters (Regional Distribution)" className="bg-bg-primary">2k+ Liters (Regional Distribution)</option>
               </select>
             </div>
             <div className="flex flex-col gap-2">
-              <label className="text-[10px] uppercase tracking-widest text-text-secondary/40">Message</label>
-              <textarea rows={4} className="bg-text-primary/5 border border-border-primary rounded-xl px-4 py-3 outline-none focus:border-brand-aqua transition-colors text-text-primary" placeholder="Tell us more about your needs..." />
+              <label className="text-[10px] uppercase tracking-widest text-text-secondary/40 font-bold">Message</label>
+              <textarea rows={4} value={message} onChange={(e) => setMessage(e.target.value)} className="bg-text-primary/5 border border-border-primary rounded-xl px-4 py-3 outline-none focus:border-brand-aqua transition-colors text-text-primary" placeholder="Tell us more about your needs..." />
             </div>
-            <button type="submit" className="w-full bg-brand-aqua hover:bg-brand-aqua/80 text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-brand-aqua/20">
-              Submit Inquiry
+            {error && <p className="text-red-400 text-sm text-center">{error}</p>}
+            <button type="submit" disabled={sending} className="w-full bg-brand-aqua hover:bg-brand-aqua/80 text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-brand-aqua/20 disabled:opacity-50">
+              {sending ? 'Sending...' : 'Submit Inquiry'}
             </button>
           </form>
+          )}
         </motion.div>
       </div>
     </section>

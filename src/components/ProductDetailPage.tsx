@@ -1,27 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { ArrowLeft, ShoppingCart, Shield, Droplets, Sparkles, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, MessageSquare, Shield, Droplets, Sparkles, CheckCircle2 } from 'lucide-react';
 import { PRODUCTS } from '../constants';
 import { Product } from '../types';
+import ContactModal from './ContactModal';
 
 export default function ProductDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [product, setProduct] = useState<Product | null>(null);
   const [selectedSize, setSelectedSize] = useState('');
+  const [showContact, setShowContact] = useState(false);
 
   useEffect(() => {
     const found = PRODUCTS.find(p => p.id === id);
     if (found) {
       setProduct(found);
       setSelectedSize(found.sizes[0]);
+      document.title = `${found.name} — AquaGlow Enterprises`;
     }
   }, [id]);
 
   if (!product) return null;
 
   return (
+    <>
     <div className="min-h-screen pt-32 pb-20 px-6 md:px-12 bg-bg-primary transition-colors duration-500">
       <div className="max-w-7xl mx-auto">
         <button 
@@ -36,10 +40,11 @@ export default function ProductDetailPage() {
           {/* Image Gallery */}
           <div className="relative aspect-square rounded-[3rem] overflow-hidden bg-text-primary/5 border border-border-primary group">
              <div className={`absolute inset-0 bg-gradient-to-br ${product.gradient} opacity-20`} />
-             <img 
-               src={product.image} 
-               alt={product.name} 
-               className="w-full h-full object-cover p-12 transform group-hover:scale-105 transition-transform duration-700" 
+           <img 
+                src={product.image} 
+                alt={product.name}
+                loading="lazy"
+                className="w-full h-full object-cover p-12 transform group-hover:scale-105 transition-transform duration-700"
              />
           </div>
 
@@ -55,7 +60,6 @@ export default function ProductDetailPage() {
             </h1>
 
             <div className="flex items-center gap-4 mb-8">
-               <span className="text-3xl font-display font-bold text-brand-pink">₹{product.price * 80}</span>
                <div className="px-3 py-1 rounded-full bg-brand-aqua/10 border border-brand-aqua/20 text-brand-aqua text-[10px] font-bold uppercase tracking-widest">
                   In Stock
                </div>
@@ -95,11 +99,9 @@ export default function ProductDetailPage() {
             </div>
 
             <div className="flex gap-4">
-              <button className="flex-1 btn-primary py-4 text-lg">
-                Add to Cart
-              </button>
-              <button className="p-4 rounded-full border border-border-primary hover:bg-text-primary/5 transition-colors">
-                 <Shield className="w-6 h-6 text-brand-coral" />
+              <button onClick={() => setShowContact(true)} className="flex-1 btn-primary py-4 text-lg flex items-center justify-center gap-3">
+                <MessageSquare className="w-5 h-5" />
+                Contact for Pricing
               </button>
             </div>
 
@@ -121,5 +123,7 @@ export default function ProductDetailPage() {
         </div>
       </div>
     </div>
+      <ContactModal isOpen={showContact} onClose={() => setShowContact(false)} defaultProduct={product?.name} />
+    </>
   );
 }

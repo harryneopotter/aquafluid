@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'motion/react';
 import { ShieldAlert, Droplets, Sparkles, Wind, Briefcase, Pill, Hotel, Utensils } from 'lucide-react';
 
 export default function SolutionsPage() {
+  useEffect(() => { document.title = 'Solutions — AquaGlow Enterprises'; }, []);
   const industries = [
     { title: 'Hospitality', icon: Hotel, desc: 'Luxury finish for hotel suites and ballrooms.' },
     { title: 'Healthcare', icon: Pill, desc: 'Hospital-grade disinfection for surgical paths.' },
@@ -21,7 +22,7 @@ export default function SolutionsPage() {
           className="absolute inset-0"
         >
           <img 
-            src="https://aqua.bluepanda.cloud/images/IMG-20260417-WA0033.jpg" 
+            src="/images/white-floor-cleaner-1l.jpg" 
             alt="Advanced Cleaning" 
             className="w-full h-full object-cover opacity-40 grayscale hover:grayscale-0 transition-all duration-1000"
           />
@@ -120,13 +121,42 @@ export default function SolutionsPage() {
          </div>
       </section>
 
-      <section className="py-32 px-6 text-center">
-         <h2 className="text-4xl font-serif font-bold text-text-primary mb-8">Need a Custom Formulation?</h2>
-         <p className="text-text-secondary mb-12 max-w-xl mx-auto">
-           Our R&D team works with large industrial partners to create bespoke cleaning chemical signatures for specialized environments.
-         </p>
-         <button className="btn-primary">Connect with R&D</button>
-      </section>
+       <section className="py-32 px-6 border-t border-border-primary">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+              <span className="text-xs uppercase tracking-[0.4em] text-brand-aqua font-bold block mb-6">Sustainability Roadmap</span>
+              <h2 className="text-4xl md:text-6xl font-serif font-bold text-text-primary mb-6">Built for a <span className="text-brand-pink italic">Cleaner</span> Tomorrow</h2>
+              <p className="text-text-secondary text-lg max-w-2xl mx-auto">Our five-year commitment to responsible manufacturing and eco-friendly formulations.</p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-8 mb-16">
+              <div className="glass-card text-center">
+                <div className="text-4xl font-display font-bold text-brand-aqua mb-2">80%</div>
+                <p className="text-text-secondary/60 text-xs uppercase tracking-widest mb-4">Biodegradable by 2029</p>
+                <p className="text-text-secondary text-sm">Transitioning all Dorron formulations to plant-based, biodegradable ingredients.</p>
+              </div>
+              <div className="glass-card text-center">
+                <div className="text-4xl font-display font-bold text-brand-pink mb-2">100%</div>
+                <p className="text-text-secondary/60 text-xs uppercase tracking-widest mb-4">Recyclable Packaging by 2028</p>
+                <p className="text-text-secondary text-sm">Eliminating non-recyclable materials and launching refill station pilots across retail.</p>
+              </div>
+              <div className="glass-card text-center">
+                <div className="text-4xl font-display font-bold text-brand-coral mb-2">40%</div>
+                <p className="text-text-secondary/60 text-xs uppercase tracking-widest mb-4">Women in Workforce by 2028</p>
+                <p className="text-text-secondary text-sm">Building an inclusive manufacturing and field sales team across all operations.</p>
+              </div>
+            </div>
+            <div className="text-center">
+              <h3 className="text-2xl font-serif font-bold text-text-primary mb-4">Introducing the Dorron EcoShield Series</h3>
+              <p className="text-text-secondary max-w-xl mx-auto mb-10">
+                Our upcoming plant-based, biodegradable multi-surface cleaner line — formulated for the eco-conscious consumer without compromising on cleaning power.
+              </p>
+              <div className="flex justify-center gap-4">
+                <button className="btn-primary">Coming Soon</button>
+                <button className="btn-outline">Connect with R&D</button>
+              </div>
+            </div>
+          </div>
+       </section>
     </div>
   );
 }

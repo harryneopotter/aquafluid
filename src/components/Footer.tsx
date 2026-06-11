@@ -52,15 +52,15 @@ export default function Footer() {
              <ul className="flex flex-col gap-6">
                 <li className="flex items-start gap-4">
                   <MapPin className="w-5 h-5 text-brand-aqua shrink-0" />
-                  <span className="text-text-secondary text-sm">AquaGlow Industrial Hub, Noida, Uttar Pradesh, India</span>
+                  <span className="text-text-secondary text-sm">18-18A, Priya Vihar 4th, Sarna Dungar, Jaipur — 302012</span>
                 </li>
-                <li className="flex items-center gap-4">
+                 <li className="flex items-center gap-4">
                   <Phone className="w-5 h-5 text-brand-pink shrink-0" />
-                  <span className="text-text-secondary text-sm">+91-98XXX-XXXXX</span>
+                  <span className="text-text-secondary text-sm">+91-93525-43210</span>
                 </li>
                 <li className="flex items-center gap-4">
                   <Mail className="w-5 h-5 text-brand-coral shrink-0" />
-                  <span className="text-text-secondary text-sm">hello@aquaglow.com</span>
+                  <span className="text-text-secondary text-sm">aquaglowenterprises@outlook.com</span>
                 </li>
              </ul>
           </div>
@@ -71,11 +71,11 @@ export default function Footer() {
             © 2026 AQUAGLOW ENTERPRISES. ALL RIGHTS RESERVED.
           </p>
           <div className="flex items-center gap-8">
-             <span className="text-text-secondary text-[10px] uppercase tracking-[0.3em] font-bold">Made with Glow</span>
-             <div className="flex gap-4 grayscale opacity-40">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" className="h-4" />
-                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" className="h-4" />
-                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" className="h-4" />
+             <span className="text-text-secondary text-[10px] uppercase tracking-[0.3em] font-bold">Clean Homes. Brighter Futures. Dorron.</span>
+             <div className="flex gap-4">
+                <img src="/images/visa.svg" alt="Visa" loading="lazy" className="h-4 brightness-0 invert" />
+                <img src="/images/mastercard.svg" alt="Mastercard" loading="lazy" className="h-4 brightness-0 invert" />
+                <img src="/images/paypal.svg" alt="PayPal" loading="lazy" className="h-4 brightness-0 invert" />
              </div>
           </div>
         </div>

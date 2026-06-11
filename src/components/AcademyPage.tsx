@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'motion/react';
 import { GraduationCap, PlayCircle, BookOpen, Award, CheckCircle2, ArrowRight } from 'lucide-react';
 
 export default function AcademyPage() {
+  useEffect(() => { document.title = 'Academy — AquaGlow University'; }, []);
   const courses = [
     { title: 'Industrial Floor Care', duration: '4 Hours', level: 'Beginner', modules: 12 },
     { title: 'Chemical Dilution Systems', duration: '2 Hours', level: 'Intermediate', modules: 8 },
@@ -32,7 +33,8 @@ export default function AcademyPage() {
              <div className="absolute inset-0 bg-brand-aqua/20 blur-3xl rounded-full" />
              <div className="relative glass-panel rounded-[3rem] p-4 aspect-video overflow-hidden group">
                 <img 
-                  src="https://aqua.bluepanda.cloud/images/dorron_det_photoshoot-2.png" 
+                  src="/images/dorron_det_photoshoot-2.png"
+                  loading="lazy" 
                   className="w-full h-full object-cover opacity-50 group-hover:scale-110 transition-transform duration-1000" 
                   alt="Training"
                 />
@@ -106,12 +108,12 @@ export default function AcademyPage() {
                   <h4 className="font-bold text-text-primary">ISO Certified</h4>
                </div>
                <div className="aspect-[3/4] rounded-3xl overflow-hidden grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all">
-                  <img src="https://aqua.bluepanda.cloud/images/IMG-20260417-WA0010.jpg" alt="Training 2" className="w-full h-full object-cover" />
+                  <img src="/images/dorron-toilet-500ml.jpg" alt="Training 2" loading="lazy" className="w-full h-full object-cover" />
                </div>
             </div>
             <div className="space-y-4 pt-12">
                <div className="aspect-[3/4] rounded-3xl overflow-hidden grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all">
-                  <img src="https://aqua.bluepanda.cloud/images/IMG-20260417-WA0022.jpg" alt="Training 3" className="w-full h-full object-cover" />
+                  <img src="/images/dorron-glass-500ml.jpg" alt="Training 3" loading="lazy" className="w-full h-full object-cover" />
                </div>
                <div className="aspect-square bg-brand-pink/10 rounded-3xl border border-brand-pink/20 p-8 flex flex-col justify-end">
                   <CheckCircle2 className="w-8 h-8 text-brand-pink mb-4" />

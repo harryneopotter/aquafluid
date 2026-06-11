@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://aquaglow.co.in/sitemap.xml

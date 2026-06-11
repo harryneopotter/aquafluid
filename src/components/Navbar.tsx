@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
-import { ShoppingCart, Menu, X, Globe, User, Sun, Moon } from 'lucide-react';
+import { Menu, X, Globe, User, Sun, Moon } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { NAVIGATION } from '../constants';
 
@@ -68,10 +68,6 @@ export default function Navbar() {
             {isLightMode ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
           </button>
 
-          <button className="p-2 hover:bg-text-primary/5 rounded-full transition-colors relative text-text-secondary">
-            <ShoppingCart className="w-5 h-5" />
-            <span className="absolute top-1 right-1 w-2 h-2 bg-brand-coral rounded-full" />
-          </button>
           
           <button className="hidden sm:flex items-center gap-2 bg-text-primary/5 hover:bg-text-primary/10 px-4 py-2 rounded-full border border-border-primary transition-all text-sm font-medium text-text-secondary">
             <User className="w-4 h-4" />

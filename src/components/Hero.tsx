@@ -82,7 +82,7 @@ export default function Hero() {
           {/* Main Hero Image */}
           <div className="relative w-full h-full rounded-3xl overflow-hidden group">
             <img 
-              src="https://aqua.bluepanda.cloud/images/dorron_floor_photoshoot-1.png" 
+              src="/images/dorron_floor_photoshoot-1.png" 
               alt="AquaGlow Products" 
               className="w-full h-full object-cover transform scale-110 group-hover:scale-100 transition-transform duration-1000"
               referrerPolicy="no-referrer"

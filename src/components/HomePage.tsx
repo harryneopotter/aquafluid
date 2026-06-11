@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import Hero from './Hero';
 import ProductGrid from './ProductGrid';
 import B2BPortal from './B2BPortal';
 
 export default function HomePage() {
+  useEffect(() => { document.title = 'AquaGlow Enterprises — Dorron Cleaning Solutions'; }, []);
   const { scrollYProgress } = useScroll();
   const yShift1 = useTransform(scrollYProgress, [0, 1], [0, -400]);
   const yShift2 = useTransform(scrollYProgress, [0, 1], [0, 400]);
@@ -46,19 +47,53 @@ export default function HomePage() {
         <ProductGrid />
         <B2BPortal />
         
-        {/* Testimonials or Vision Section */}
+        {/* Company Vision Section */}
         <section className="py-32 px-6 bg-gradient-to-b from-transparent to-bg-primary/50">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-20">
+              <span className="text-xs uppercase tracking-[0.4em] text-brand-aqua font-bold block mb-6">Our Vision</span>
+              <h2 className="text-4xl md:text-6xl font-serif font-bold text-text-primary leading-tight mb-8">
+                To make Dorron India's most trusted<br />
+                <span className="text-brand-pink italic">household cleaning brand</span>
+              </h2>
+              <p className="text-text-secondary text-lg max-w-2xl mx-auto leading-relaxed">
+                Affordable, effective, and environmentally responsible — AquaGlow Enterprises
+                has been delivering the Dorron promise of cleanliness for over three years.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="glass-card text-center">
+                <div className="text-5xl font-display font-bold text-brand-aqua mb-4">3+</div>
+                <p className="text-text-secondary text-sm">Years of manufacturing excellence and growing brand trust</p>
+              </div>
+              <div className="glass-card text-center">
+                <div className="text-5xl font-display font-bold text-brand-pink mb-4">18+</div>
+                <p className="text-text-secondary text-sm">Active SKUs spanning home and commercial cleaning needs</p>
+              </div>
+              <div className="glass-card text-center">
+                <div className="text-5xl font-display font-bold text-brand-coral mb-4">30%</div>
+                <p className="text-text-secondary text-sm">Year-on-year revenue growth in an expanding market</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Mission Section */}
+        <section className="py-24 px-6 border-t border-border-primary">
           <div className="max-w-4xl mx-auto text-center">
-            <h3 className="text-3xl md:text-5xl font-serif italic text-text-primary/80 mb-12 leading-tight">
-              "We aren't just selling cleaning solutions; we're redefining the sensory experience of a clean space."
-            </h3>
+            <span className="text-xs uppercase tracking-[0.4em] text-brand-pink font-bold block mb-6">Our Mission</span>
+            <p className="text-2xl md:text-4xl font-serif italic text-text-primary/80 leading-tight mb-12">
+              "To deliver cleaning solutions that enhance the hygiene, health,<br />
+              and comfort of everyday living — for every home and every budget."
+            </p>
             <div className="flex flex-col items-center gap-4">
-               <div className="w-16 h-16 rounded-full bg-brand-pink/20 flex items-center justify-center">
-                  <span className="text-brand-pink font-bold text-xl">D</span>
+               <div className="w-16 h-16 rounded-full bg-brand-aqua/20 flex items-center justify-center">
+                  <span className="text-brand-aqua font-bold text-xl">A</span>
                </div>
                <div className="text-center">
-                  <p className="font-bold text-text-primary tracking-widest text-sm uppercase">Founder, AquaGlow</p>
-                  <p className="text-brand-aqua text-xs font-medium">10+ Years of Industrial Excellence</p>
+                  <p className="font-bold text-text-primary tracking-widest text-sm uppercase">AquaGlow Enterprises</p>
+                  <p className="text-brand-pink text-xs font-medium">Powering the Dorron promise, every day</p>
                </div>
             </div>
           </div>

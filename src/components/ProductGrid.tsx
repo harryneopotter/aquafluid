@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
-import { ShoppingCart, Plus, Info } from 'lucide-react';
+import { Plus, Info, MessageSquare } from 'lucide-react';
 import { Product } from '../types';
 import { PRODUCTS } from '../constants';
+import ContactModal from './ContactModal';
 
 interface ProductCardProps {
   product: Product;
@@ -13,6 +14,7 @@ interface ProductCardProps {
 
 const ProductCard = ({ product, index }: ProductCardProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [showContact, setShowContact] = useState(false);
   const navigate = useNavigate();
 
   return (
@@ -34,6 +36,7 @@ const ProductCard = ({ product, index }: ProductCardProps) => {
         <img 
           src={product.image} 
           alt={product.name}
+          loading="lazy"
           className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000 ease-out"
           referrerPolicy="no-referrer"
         />
@@ -80,14 +83,18 @@ const ProductCard = ({ product, index }: ProductCardProps) => {
             </AnimatePresence>
 
             <div className="flex items-center justify-between">
-               <span className="text-lg font-display font-bold text-brand-pink">₹{product.price * 80}</span>
-               <button className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-text-secondary hover:text-text-primary transition-colors">
-                  Add to cart <ShoppingCart className="w-3 h-3" />
-               </button>
+                <button
+                  onClick={(e) => { e.stopPropagation(); setShowContact(true); }}
+                  className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-aqua hover:text-brand-aqua/70 transition-colors"
+                >
+                  <MessageSquare className="w-3 h-3" />
+                  Contact for Pricing
+                </button>
             </div>
           </div>
         </div>
       </div>
+      <ContactModal isOpen={showContact} onClose={() => setShowContact(false)} defaultProduct={product.name} />
     </motion.div>
   );
 };
