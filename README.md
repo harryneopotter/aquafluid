@@ -19,9 +19,11 @@ Two lead capture forms (product inquiries and B2B quotes) POST to `/api/contact`
 and send email via **BREVO SMTP**. Set these in `.env` or in your deployment's env vars:
 
 ```env
+BREVO_SMTP_HOST="your-smtp-host"
+BREVO_SMTP_PORT="587"
 BREVO_SMTP_USER="your-brevo-login-email"
 BREVO_SMTP_KEY="your-brevo-smtp-key"
-BREVO_FROM_EMAIL="noreply@aquaglow.co.in"
+BREVO_FROM_EMAIL="your-from-email@example.com"
 ```
 
 - **Local dev:** Vite proxies `/api/*` to Express on port 3001.
@@ -95,8 +97,8 @@ npx netlify deploy --prod --dir=dist --functions=netlify/functions
 ### Required env vars
 | Variable | Description |
 |----------|-------------|
-| `BREVO_SMTP_HOST` | `smtp-relay.brevo.com` |
-| `BREVO_SMTP_PORT` | `587` |
+| `BREVO_SMTP_HOST` | Your SMTP host from BREVO |
+| `BREVO_SMTP_PORT` | Usually `587` |
 | `BREVO_SMTP_USER` | Your BREVO login email |
 | `BREVO_SMTP_KEY` | Your BREVO SMTP key |
-| `BREVO_FROM_EMAIL` | `noreply@aquaglow.co.in` |
+| `BREVO_FROM_EMAIL` | Verified sender email configured in BREVO |

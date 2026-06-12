@@ -14,6 +14,12 @@ export interface ContactPayload {
   message: string;
 }
 
+function requiredEnv(name: string): string {
+  const value = process.env[name];
+  if (!value) throw new Error(`Missing required env var: ${name}`);
+  return value;
+}
+
 function escapeHtml(s: string): string {
   return s
     .replace(/&/g, '&amp;')
@@ -25,12 +31,12 @@ function escapeHtml(s: string): string {
 
 function createTransporter() {
   return nodemailer.createTransport({
-    host: process.env.BREVO_SMTP_HOST || 'smtp-relay.brevo.com',
-    port: Number(process.env.BREVO_SMTP_PORT) || 587,
+    host: requiredEnv('BREVO_SMTP_HOST'),
+    port: Number(process.env.BREVO_SMTP_PORT || '587'),
     secure: false,
     auth: {
-      user: process.env.BREVO_SMTP_USER,
-      pass: process.env.BREVO_SMTP_KEY,
+      user: requiredEnv('BREVO_SMTP_USER'),
+      pass: requiredEnv('BREVO_SMTP_KEY'),
     },
   });
 }
@@ -78,7 +84,7 @@ app.post('/api/contact', async (req, res) => {
 
     const transporter = createTransporter();
     await transporter.sendMail({
-      from: `"${escapeHtml(payload.name)}" <${process.env.BREVO_FROM_EMAIL || 'noreply@aquaglow.co.in'}>`,
+      from: `"${escapeHtml(payload.name)}" <${requiredEnv('BREVO_FROM_EMAIL')}>`,
       to: 'aquaglowenterprisesjaipur@gmail.com',
       subject: `Pricing Inquiry: ${escapeHtml(payload.product)}`,
       html: buildEmailHtml(payload),

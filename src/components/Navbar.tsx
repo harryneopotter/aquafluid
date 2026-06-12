@@ -35,14 +35,11 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <Link to="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 bg-brand-aqua rounded-full flex items-center justify-center relative overflow-hidden">
-             <div className="absolute inset-0 bg-brand-pink/20 animate-pulse" />
-             <span className="text-white font-bold text-xl relative z-10">A</span>
-          </div>
-          <div className="flex flex-col">
-            <span className="font-display font-bold text-xl tracking-wider text-text-primary group-hover:text-brand-aqua transition-colors">AQUAGLOW</span>
-            <span className="text-[10px] uppercase tracking-[0.2em] text-brand-pink">Dorron cleaning</span>
-          </div>
+          <img
+            src="/images/aqua-logo-med.png"
+            alt="AquaGlow Enterprises"
+            className="h-12 w-auto object-contain"
+          />
         </Link>
 
         {/* Desktop Nav */}

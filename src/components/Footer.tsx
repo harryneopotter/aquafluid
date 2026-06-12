@@ -8,15 +8,11 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-24">
           <div className="flex flex-col gap-8">
-             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-brand-aqua rounded-full flex items-center justify-center">
-                 <span className="text-white font-bold text-xl">A</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="font-display font-bold text-xl tracking-wider text-text-primary">AQUAGLOW</span>
-                <span className="text-[10px] uppercase tracking-[0.2em] text-brand-pink">Dorron cleaning</span>
-              </div>
-            </div>
+             <img
+               src="/images/aqua-logo-med.png"
+               alt="AquaGlow Enterprises"
+               className="h-14 w-auto object-contain"
+             />
             <p className="text-text-secondary text-sm leading-relaxed max-w-xs">
               Transforming the cleaning industry with fluid sophistication and high-performance products built on over 10 years of expertise.
             </p>

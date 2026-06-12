@@ -98,6 +98,56 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+
+        {/* Trust Section */}
+        <section className="py-24 px-6 border-t border-border-primary bg-text-primary/2">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-14">
+              <span className="text-xs uppercase tracking-[0.4em] text-brand-aqua font-bold block mb-6">Trusted Partnerships</span>
+              <h2 className="text-4xl md:text-5xl font-serif font-bold text-text-primary mb-6">
+                Built for Retail, Distribution, and <span className="text-brand-pink italic">Institutional Scale</span>
+              </h2>
+              <p className="text-text-secondary text-lg max-w-2xl mx-auto leading-relaxed">
+                Dorron is growing through trade relationships, channel partnerships, and on-ground distribution
+                support designed for long-term market presence.
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-8 items-stretch">
+              <div className="relative rounded-[2rem] overflow-hidden border border-border-primary bg-text-primary/5 min-h-[320px]">
+                <img
+                  src="/images/ourclients-1.jpg"
+                  alt="AquaGlow client and retail network overview"
+                  loading="lazy"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-bg-primary/85 via-bg-primary/15 to-transparent" />
+                <div className="absolute left-6 right-6 bottom-6 glass-panel rounded-2xl p-5">
+                  <h3 className="text-xl font-bold text-text-primary mb-2">Trade-Focused Growth</h3>
+                  <p className="text-sm text-text-secondary leading-relaxed">
+                    Structured distributor support, product consistency, and pricing discipline built for repeat channel growth.
+                  </p>
+                </div>
+              </div>
+
+              <div className="relative rounded-[2rem] overflow-hidden border border-border-primary bg-text-primary/5 min-h-[320px]">
+                <img
+                  src="/images/ourclients-2.jpg"
+                  alt="AquaGlow institutional and client relationships"
+                  loading="lazy"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-bg-primary/85 via-bg-primary/15 to-transparent" />
+                <div className="absolute left-6 right-6 bottom-6 glass-panel rounded-2xl p-5">
+                  <h3 className="text-xl font-bold text-text-primary mb-2">Institutional Readiness</h3>
+                  <p className="text-sm text-text-secondary leading-relaxed">
+                    Prepared for hospitality, healthcare, offices, and commercial cleaning programs with scalable packaging and support.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </main>
   );
